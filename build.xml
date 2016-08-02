@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="php-mvc-pilot" default="static-analysis">
+ <!-- By default, we assume all tools to be on the $PATH -->
+ <property name="phpcs"   value="phpcs"/>
+ <target name="static-analysis"
+         depends="lint,phpcs-ci"
+         description="Performs static analysis" />
+
+ <target name="clean"
+         unless="clean.done"
+         description="Cleanup build artifacts">
+  <delete dir="${basedir}/build/api"/>
+  <delete dir="${basedir}/build/coverage"/>
+  <delete dir="${basedir}/build/logs"/>
+  <property name="clean.done" value="true"/>
+ </target>
+ <target name="prepare"
+         unless="prepare.done"
+         depends="clean"
+         description="Prepare for build">
+  <mkdir dir="${basedir}/build/api"/>
+  <mkdir dir="${basedir}/build/coverage"/>
+  <mkdir dir="${basedir}/build/logs"/>
+  <property name="prepare.done" value="true"/>
+ </target>
+
+ <target name="lint"
+         unless="lint.done"
+         description="Perform syntax check of sourcecode files">
+  <apply executable="php" taskname="lint">
+   <arg value="-l" />
+
+   <fileset dir="${basedir}/app">
+    <include name="**/*.php" />
+    <modified />
+   </fileset>
+   <fileset dir="${basedir}/classes">
+    <include name="**/*.php" />
+    <modified />
+   </fileset>
+  </apply>
+
+  <property name="lint.done" value="true"/>
+ </target>
+
+ <target name="phpcs"
+         unless="phpcs.done"
+         description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+  <exec executable="${phpcs}" taskname="phpcs">
+   <arg value="--standard=PSR2" />
+   <arg value="--extensions=php" />
+   <arg value="--ignore=autoload.php" />
+   <arg path="${basedir}/app" />
+   <arg path="${basedir}/classes" />
+  </exec>
+
+  <property name="phpcs.done" value="true"/>
+ </target>
+
+ <target name="phpcs-ci"
+         unless="phpcs.done"
+         depends="prepare"
+         description="Find coding standard violations using PHP_CodeSniffer and log result in XML format.">
+  <exec executable="${phpcs}" output="/dev/null" taskname="phpcs">
+   <arg value="--report=checkstyle" />
+   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+   <arg value="--standard=PSR2" />
+   <arg value="--extensions=php" />
+   <arg value="--ignore=autoload.php" />
+   <arg path="${basedir}/app" />
+   <arg path="${basedir}/classes" />
+  </exec>
+
+  <property name="phpcs.done" value="true"/>
+ </target>
+</project>

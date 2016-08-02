@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/skin/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/skin/css/style.css">
+</head>
+<body>
+    <div id="container" class="container">
+        <div id="header" class="page-header text-center">
+            <h1><a href="/">PRIME NUMBER GENERATOR</a></h1>
+        </div>
+        <div id="content">
+            <form action="" class="text-center">
+                <div class="page-title">
+                    <h4>
+                        How many prime numbers you want to generate?
+                    </h4>
+                    <input min="1" type="number" id="prime-number-amount" value="1000"/>
+                </div>
+                <br/>
+                <div >
+                    <br/>
+                    <p class="text-center">
+                        <a id="ajax-request-button" href="/api" class="btn btn-primary">
+                            <span>Generate</span>
+                            <img style="display: none" id="ajax-request-img" src="/skin/img/reload.gif" alt="ajax-request" title="ajax-request" />
+                        </a>
+                    </p>
+                    <div id="prime-number-list-wrapper">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--end content-->
+                    <div id="footer" class="page-footer text-center">
+                <a href="#"><h2>FOOTER HERE</h2></a>
+            </div><!--end footer-->
+        </div> <!--end container-->
+        <div class="back-to-top" id="back-top">
+            <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
+        </div>
+        <script src="/skin/js/jquery.min.js"></script>
+        <script src="/skin/js/main.js"></script>
+    </body>
+</html>

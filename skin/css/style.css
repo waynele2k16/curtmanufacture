@@ -1,0 +1,46 @@
+.page-footer {
+    border-top: 1px solid #eeeeee;
+    margin: 40px 0 20px;
+    padding-top: 9px;
+}
+
+#content {
+    min-height: 600px;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 30px;
+    background: #ccc;
+    color: #444;
+    cursor: pointer;
+    border: 0;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+}
+#back-to-top:hover {
+    background: #e9ebec;
+}
+#back-to-top.show {
+    opacity: 1;
+}
+
+#ajax-request-img {
+    width: 20px;
+}
+
+#ajax-request-button {
+    min-width: 150px;
+}
+
+#prime-number-list li {
+    padding: 5px;
+}
